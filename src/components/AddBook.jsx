@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import generateUniqueId from 'generate-unique-id';
-import { addBook } from '../redux/features/books/booksSlice';
+import { postBooks, fetchBooks } from '../redux/features/books/booksSlice';
 
 const AddBook = () => {
   const dispatch = useDispatch();
@@ -20,8 +20,9 @@ const AddBook = () => {
       item_id: generateUniqueId(),
     };
 
-    dispatch(addBook(newBookDetails));
+    dispatch(postBooks(newBookDetails));
     setBookDetails({ title: '', author: '', category: '' });
+    dispatch(fetchBooks());
   };
 
   return (

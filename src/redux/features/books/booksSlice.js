@@ -11,7 +11,7 @@ export const fetchBooks = createAsyncThunk('book/fetchBooks', () => axios
   .get('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/PXG5axvIJFA3YdmHdF5Q/books')
   .then((response) => response.data));
 
-export const addBooks = createAsyncThunk('book/addBooks', async (newBookDetails) => {
+export const postBooks = createAsyncThunk('book/postBooks', async (newBookDetails) => {
   const response = await axios.post(
     'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/PXG5axvIJFA3YdmHdF5Q/books',
     newBookDetails,
@@ -24,9 +24,6 @@ export const booksSlice = createSlice(
     name: 'book',
     initialState,
     reducers: {
-      addBook: (state, action) => {
-        state.booksLibrary.push(action.payload);
-      },
       removeBook: (state, action) => {
         state.booksLibrary = state.booksLibrary.filter(
           (book) => book.itemId !== action.payload,
@@ -47,13 +44,13 @@ export const booksSlice = createSlice(
         state.booksLibrary = [];
         state.error = action.error.message;
       });
-      builder.addCase(addBooks.pending, (state) => {
+      builder.addCase(postBooks.pending, (state) => {
         state.loading = true;
       });
-      builder.addCase(addBooks.fulfilled, (state) => {
+      builder.addCase(postBooks.fulfilled, (state) => {
         state.loading = false;
       });
-      builder.addCase(addBooks.rejected, (state) => {
+      builder.addCase(postBooks.rejected, (state) => {
         state.loading = false;
       });
     },
