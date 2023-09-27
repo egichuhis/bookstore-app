@@ -1,9 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Chart from './charts/DonutChart';
+import { removeBook } from '../redux/features/books/booksSlice';
 
 const BookCard = ({ book }) => {
-  const { category, title, author } = book;
+  const { category, title, author, itemId } = book;
+  const dispatch = useDispatch();
 
   return (
     <div className="card mt-4">
@@ -23,39 +26,50 @@ const BookCard = ({ book }) => {
                   {author}
                 </h6>
                 <div className="d-flex flex-row justify-content-start gap-4">
-                  <h6
+                  <button
+                    type="button"
                     className="mb-2"
                     style={{
                       width: 'fit-content',
                       height: 'auto',
                       color: '#4386bf',
                       fontSize: 14,
+                      border: 'none',
+                      background: 'white',
                     }}
                   >
                     Comments
-                  </h6>
-                  <h6
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => dispatch(removeBook(itemId))}
                     className="mb-2"
                     style={{
                       width: 'fit-content',
                       height: 'auto',
                       color: '#4386bf',
                       fontSize: 14,
+                      border: 'none',
+                      background: 'white',
                     }}
                   >
                     Remove
-                  </h6>
-                  <h6
+                  </button>
+
+                  <button
+                    type="button"
                     className="mb-2"
                     style={{
                       width: 'fit-content',
                       height: 'auto',
                       color: '#4386bf',
                       fontSize: 14,
+                      border: 'none',
+                      background: 'white',
                     }}
                   >
                     Edit
-                  </h6>
+                  </button>
                 </div>
               </div>
             </div>
@@ -109,6 +123,7 @@ BookCard.propTypes = {
     category: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
+    itemId: PropTypes.string.isRequired,
   }).isRequired,
 };
 

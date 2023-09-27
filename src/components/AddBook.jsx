@@ -7,6 +7,7 @@ const AddBook = () => {
   const [bookDetails, setBookDetails] = useState({
     title: '',
     author: '',
+    itemId: 
   });
 
   return (
@@ -43,7 +44,10 @@ const AddBook = () => {
             style={{ width: '25%' }}
           >
             <button
-              onClick={() => dispatch(addBook(bookDetails))}
+              onClick={() => {
+                dispatch(addBook(bookDetails));
+                setBookDetails({ title: '', author: '' });
+              }}
               className="btn btn-primary btn-sm"
               type="button"
               style={{
