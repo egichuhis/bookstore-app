@@ -1,7 +1,5 @@
 <a name="readme-top"></a>
 <div align="center">
-   <img src="./src/imgs/logo.png" alt="logo" width="100"  height="auto" />
-  <br/>
    <img src="./src/imgs/1.png" alt="logo" width="600"  height="auto" />
    <br/>
 </div>
@@ -52,8 +50,9 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **Home page, List Books**
-- **Add Books Section**
+- **Home page, List of Books**
+- **Add Books to App and List**
+- **Remove Books from App and List**
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -133,6 +132,7 @@ Example command:
 ## 🔭 Future Features <a name="future-features"></a>
 
 - [ ] **Book Categories Page**
+- [ ] **Fetch Books from API**
 - [ ] **Deployment**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
