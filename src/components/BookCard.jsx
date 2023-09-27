@@ -104,4 +104,12 @@ const BookCard = ({ book }) => {
   );
 };
 
+BookCard.propTypes = {
+  book: PropTypes.shape({
+    category: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 export default BookCard;

@@ -8,7 +8,7 @@ const BooksList = () => {
   return (
     <div>
       {myBooks.map((book) => (
-        <ul key={book.id}>
+        <ul key={book.id} className="list-unstyled">
           <li>
             <BookCard book={book} />
           </li>
