@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import generateUniqueId from 'generate-unique-id';
 import { addBook } from '../redux/features/books/booksSlice';
 
 const AddBook = () => {
@@ -7,8 +8,17 @@ const AddBook = () => {
   const [bookDetails, setBookDetails] = useState({
     title: '',
     author: '',
-    itemId: 
   });
+
+  const addNewBook = () => {
+    const newBookDetails = {
+      ...bookDetails,
+      itemId: generateUniqueId(),
+    };
+
+    dispatch(addBook(newBookDetails));
+    setBookDetails({ title: '', author: '' });
+  };
 
   return (
     <div className="card mt-4" style={{ border: 'none' }}>
@@ -44,10 +54,7 @@ const AddBook = () => {
             style={{ width: '25%' }}
           >
             <button
-              onClick={() => {
-                dispatch(addBook(bookDetails));
-                setBookDetails({ title: '', author: '' });
-              }}
+              onClick={addNewBook}
               className="btn btn-primary btn-sm"
               type="button"
               style={{

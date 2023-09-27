@@ -5,7 +5,9 @@ import Chart from './charts/DonutChart';
 import { removeBook } from '../redux/features/books/booksSlice';
 
 const BookCard = ({ book }) => {
-  const { category, title, author, itemId } = book;
+  const {
+    category, title, author, itemId,
+  } = book;
   const dispatch = useDispatch();
 
   return (
@@ -120,7 +122,7 @@ const BookCard = ({ book }) => {
 
 BookCard.propTypes = {
   book: PropTypes.shape({
-    category: PropTypes.string.isRequired,
+    category: PropTypes.string,
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     itemId: PropTypes.string.isRequired,
