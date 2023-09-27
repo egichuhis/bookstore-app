@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  categories: [],
+  bookCategories: ['Fiction', 'Romance', 'History', 'Science', 'Fantasy'],
 };
 
 export const categoriesSlice = createSlice(

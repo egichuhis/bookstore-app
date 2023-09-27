@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import generateUniqueId from 'generate-unique-id';
 import { addBook } from '../redux/features/books/booksSlice';
 
 const AddBook = () => {
   const dispatch = useDispatch();
+
+  const bookCategories = useSelector((state) => state.categories.bookCategories);
+
   const [bookDetails, setBookDetails] = useState({
     title: '',
     author: '',
@@ -55,11 +58,11 @@ const AddBook = () => {
           >
             <select id="categorySelect" name="category" className="w-100 p-1 text-muted">
               <option value="" disabled selected>Category</option>
-              <option value="fiction">Fiction</option>
-              <option value="romance">Romance</option>
-              <option value="history">History</option>
-              <option value="science">Science</option>
-              <option value="fantasy">Fantasy</option>
+              {bookCategories.map((category) => (
+                <option key={category.toLowerCase()} value={category.toLowerCase()}>
+                  {category}
+                </option>
+              ))}
             </select>
           </div>
 
