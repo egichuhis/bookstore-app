@@ -1,31 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
-  booksLibrary: [
-    {
-      itemId: 'item1',
-      title: 'The Great Gatsby',
-      author: 'John Smith',
-      category: 'Fiction',
-    },
-    {
-      itemId: 'item2',
-      title: 'Anna Karenina',
-      author: 'Leo Tolstoy',
-      category: 'Fiction',
-    },
-    {
-      itemId: 'item3',
-      title: 'The Selfish Gene',
-      author: 'Richard Dawkins',
-      category: 'Nonfiction',
-    },
-  ],
+  loading: false,
+  booksLibrary: [],
+  error: '',
 };
+
+export const fetchBooks = createAsyncThunk('book/fetchBooks', () => axios
+  .get('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/PXG5axvIJFA3YdmHdF5Q/books')
+  .then((response) => response.data));
 
 export const booksSlice = createSlice(
   {
-    name: 'books',
+    name: 'book',
     initialState,
     reducers: {
       addBook: (state, action) => {
@@ -36,6 +24,21 @@ export const booksSlice = createSlice(
           (book) => book.itemId !== action.payload,
         );
       },
+    },
+    extraReducers: (builder) => {
+      builder.addCase(fetchBooks.pending, (state) => {
+        state.loading = true;
+      });
+      builder.addCase(fetchBooks.fulfilled, (state, action) => {
+        state.loading = false;
+        state.booksLibrary = Object.values(action.payload);
+        state.error = '';
+      });
+      builder.addCase(fetchBooks.rejected, (state, action) => {
+        state.loading = false;
+        state.booksLibrary = [];
+        state.error = action.error.message;
+      });
     },
   },
 );

@@ -1,14 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Chart from './charts/DonutChart';
-import { removeBook } from '../redux/features/books/booksSlice';
 
 const BookCard = ({ book }) => {
-  const {
-    category, title, author, itemId,
-  } = book;
-  const dispatch = useDispatch();
+  const { title, author, category } = book[0];
 
   return (
     <div className="card mt-4">
@@ -44,7 +39,6 @@ const BookCard = ({ book }) => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => dispatch(removeBook(itemId))}
                     className="mb-2"
                     style={{
                       width: 'fit-content',
