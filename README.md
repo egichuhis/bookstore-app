@@ -52,8 +52,9 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **Home page, List Books**
-- **Add Books Section**
+- **Home page, List of Books**
+- **Add Books to App and List**
+- **Remove Books from App and List**
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -133,6 +134,7 @@ Example command:
 ## 🔭 Future Features <a name="future-features"></a>
 
 - [ ] **Book Categories Page**
+- [ ] **Fetch Books from API**
 - [ ] **Deployment**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
