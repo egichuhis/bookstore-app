@@ -11,6 +11,14 @@ export const fetchBooks = createAsyncThunk('book/fetchBooks', () => axios
   .get('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/PXG5axvIJFA3YdmHdF5Q/books')
   .then((response) => response.data));
 
+export const addBooks = createAsyncThunk('book/addBooks', async (newBookDetails) => {
+  const response = await axios.post(
+    'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/PXG5axvIJFA3YdmHdF5Q/books',
+    newBookDetails,
+  );
+  return response.data;
+});
+
 export const booksSlice = createSlice(
   {
     name: 'book',
@@ -38,6 +46,15 @@ export const booksSlice = createSlice(
         state.loading = false;
         state.booksLibrary = [];
         state.error = action.error.message;
+      });
+      builder.addCase(addBooks.pending, (state) => {
+        state.loading = true;
+      });
+      builder.addCase(addBooks.fulfilled, (state) => {
+        state.loading = false;
+      });
+      builder.addCase(addBooks.rejected, (state) => {
+        state.loading = false;
       });
     },
   },

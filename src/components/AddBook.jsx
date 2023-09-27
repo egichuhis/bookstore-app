@@ -11,16 +11,17 @@ const AddBook = () => {
   const [bookDetails, setBookDetails] = useState({
     title: '',
     author: '',
+    category: '',
   });
 
   const addNewBook = () => {
     const newBookDetails = {
       ...bookDetails,
-      itemId: generateUniqueId(),
+      item_id: generateUniqueId(),
     };
 
     dispatch(addBook(newBookDetails));
-    setBookDetails({ title: '', author: '' });
+    setBookDetails({ title: '', author: '', category: '' });
   };
 
   return (
@@ -56,7 +57,12 @@ const AddBook = () => {
             className="col-6 col-md-4 align-self-center"
             style={{ width: '20%' }}
           >
-            <select id="categorySelect" name="category" className="w-100 p-1 text-muted">
+            <select
+              id="categorySelect"
+              name="category"
+              className="w-100 p-1 text-muted"
+              onChange={(e) => setBookDetails({ ...bookDetails, category: e.target.value })}
+            >
               <option value="" disabled selected>Category</option>
               {bookCategories.map((category) => (
                 <option key={category.toLowerCase()} value={category.toLowerCase()}>

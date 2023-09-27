@@ -119,7 +119,7 @@ BookCard.propTypes = {
     category: PropTypes.string,
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
-    itemId: PropTypes.string.isRequired,
+    item_id: PropTypes.string.isRequired,
   }).isRequired,
 };
 
