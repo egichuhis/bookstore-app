@@ -27,7 +27,7 @@ const AddBook = () => {
         <div className="row">
           <div
             className="col-6 col-md-4 align-self-center"
-            style={{ width: '50%' }}
+            style={{ width: '40%' }}
           >
             <input
               type="text"
@@ -39,7 +39,7 @@ const AddBook = () => {
           </div>
           <div
             className="col-6 col-md-4 align-self-center"
-            style={{ width: '25%' }}
+            style={{ width: '20%' }}
           >
             <input
               type="text"
@@ -50,8 +50,22 @@ const AddBook = () => {
             />
           </div>
           <div
+            className="col-6 col-md-4 align-self-center"
+            style={{ width: '20%' }}
+          >
+            <select id="categorySelect" name="category" className="w-100 p-1 text-muted">
+              <option value="" disabled selected>Category</option>
+              <option value="fiction">Fiction</option>
+              <option value="romance">Romance</option>
+              <option value="history">History</option>
+              <option value="science">Science</option>
+              <option value="fantasy">Fantasy</option>
+            </select>
+          </div>
+
+          <div
             className="col-md-4 text-end align-self-center"
-            style={{ width: '25%' }}
+            style={{ width: '20%' }}
           >
             <button
               onClick={addNewBook}
