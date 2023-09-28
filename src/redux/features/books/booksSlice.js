@@ -3,17 +3,27 @@ import axios from 'axios';
 
 const initialState = {
   loading: false,
+  appID: localStorage.getItem('appID') || '',
   booksLibrary: [],
   error: '',
 };
 
+export const createNewApp = createAsyncThunk('book/createNewApp', async () => {
+  const response = await axios.post(
+    'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/',
+  );
+
+  const appID = response.data;
+  localStorage.setItem('appID', appID);
+});
+
 export const fetchBooks = createAsyncThunk('book/fetchBooks', () => axios
-  .get('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/PXG5axvIJFA3YdmHdF5Q/books')
+  .get(`https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/${initialState.appID}/books`)
   .then((response) => response.data));
 
 export const postBooks = createAsyncThunk('book/postBooks', async (newBookDetails) => {
   const response = await axios.post(
-    'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/PXG5axvIJFA3YdmHdF5Q/books',
+    `https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/${initialState.appID}/books`,
     newBookDetails,
   );
   return response.data;
@@ -53,10 +63,17 @@ export const booksSlice = createSlice(
       builder.addCase(postBooks.rejected, (state) => {
         state.loading = false;
       });
+      builder.addCase(createNewApp.pending, (state) => {
+        state.loading = true;
+      });
+      builder.addCase(createNewApp.fulfilled, (state) => {
+        state.loading = false;
+      });
+      builder.addCase(createNewApp.rejected, (state) => {
+        state.loading = false;
+      });
     },
   },
 );
-
-export const { addBook, removeBook } = booksSlice.actions;
 
 export default booksSlice.reducer;
