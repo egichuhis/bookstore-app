@@ -12,8 +12,6 @@ const BookCard = ({ book, bookId }) => {
     dispatch(fetchBooks());
   };
 
-  console.log(book);
-
   return (
     <div className="card mt-4">
       <div className="container">
@@ -131,6 +129,7 @@ BookCard.propTypes = {
     author: PropTypes.string.isRequired,
     item_id: PropTypes.string.isRequired,
   }).isRequired,
+  bookId: PropTypes.string.isRequired,
 };
 
 export default BookCard;

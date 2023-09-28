@@ -4,7 +4,7 @@ import axios from 'axios';
 const initialState = {
   loading: false,
   appID: localStorage.getItem('appID') || '',
-  booksLibrary: {},
+  booksLibrary: [],
   error: '',
 };
 
@@ -77,6 +77,15 @@ export const booksSlice = createSlice(
         state.loading = false;
       });
       builder.addCase(createNewApp.rejected, (state) => {
+        state.loading = false;
+      });
+      builder.addCase(deleteBook.pending, (state) => {
+        state.loading = true;
+      });
+      builder.addCase(deleteBook.fulfilled, (state) => {
+        state.loading = false;
+      });
+      builder.addCase(deleteBook.rejected, (state) => {
         state.loading = false;
       });
     },
