@@ -14,13 +14,13 @@ const AddBook = () => {
     category: '',
   });
 
-  const addNewBook = () => {
+  const addNewBook = async () => {
     const newBookDetails = {
       ...bookDetails,
       item_id: generateUniqueId(),
     };
 
-    dispatch(postBooks(newBookDetails));
+    await dispatch(postBooks(newBookDetails));
     setBookDetails({ title: '', author: '', category: '' });
     dispatch(fetchBooks());
   };
