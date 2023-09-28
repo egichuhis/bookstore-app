@@ -4,7 +4,7 @@ import { fetchBooks, createNewApp } from '../redux/features/books/booksSlice';
 import BookCard from './BookCard';
 
 const BooksList = () => {
-  const myBooks = useSelector((state) => state.books.booksLibrary);
+  const myBooksResponse = useSelector((state) => state.books.booksLibrary);
   const appID = useSelector((state) => state.books.appID);
   const dispatch = useDispatch();
 
@@ -21,12 +21,14 @@ const BooksList = () => {
     }
   }, [dispatch, appID.length]);
 
+  const Books = myBooksResponse[0] || {};
+
   return (
     <div>
-      {myBooks.map((book) => (
-        <ul key={book.title} className="list-unstyled">
+      {Object.keys(Books).map((key) => (
+        <ul key={key} className="list-unstyled">
           <li>
-            <BookCard book={book} />
+            <BookCard book={Books[key][0]} bookId={key} />
           </li>
         </ul>
       ))}

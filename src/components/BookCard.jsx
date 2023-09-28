@@ -1,9 +1,18 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Chart from './charts/DonutChart';
+import { fetchBooks, deleteBook } from '../redux/features/books/booksSlice';
 
-const BookCard = ({ book }) => {
-  const { title, author, category } = book[0];
+const BookCard = ({ book, bookId }) => {
+  const dispatch = useDispatch();
+  const { title, author, category } = book;
+  const removeBook = async () => {
+    await dispatch(deleteBook(bookId));
+    dispatch(fetchBooks());
+  };
+
+  console.log(book);
 
   return (
     <div className="card mt-4">
@@ -38,6 +47,7 @@ const BookCard = ({ book }) => {
                     Comments
                   </button>
                   <button
+                    onClick={removeBook(bookId)}
                     type="button"
                     className="mb-2"
                     style={{

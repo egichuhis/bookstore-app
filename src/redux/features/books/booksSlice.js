@@ -4,7 +4,7 @@ import axios from 'axios';
 const initialState = {
   loading: false,
   appID: localStorage.getItem('appID') || '',
-  booksLibrary: [],
+  booksLibrary: {},
   error: '',
 };
 
@@ -19,12 +19,19 @@ export const createNewApp = createAsyncThunk('book/createNewApp', async () => {
 
 export const fetchBooks = createAsyncThunk('book/fetchBooks', () => axios
   .get(`https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/${initialState.appID}/books`)
-  .then((response) => response.data));
+  .then((response) => response));
 
 export const postBooks = createAsyncThunk('book/postBooks', async (newBookDetails) => {
   const response = await axios.post(
     `https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/${initialState.appID}/books`,
     newBookDetails,
+  );
+  return response.data;
+});
+
+export const deleteBook = createAsyncThunk('book/deleteBook', async (bookId) => {
+  const response = await axios.delete(
+    `https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/${initialState.appID}/books/${bookId}`,
   );
   return response.data;
 });
