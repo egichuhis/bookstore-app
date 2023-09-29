@@ -7,6 +7,7 @@ import { fetchBooks, deleteBook } from '../redux/features/books/booksSlice';
 const BookCard = ({ book, bookId }) => {
   const dispatch = useDispatch();
   const { title, author, category } = book;
+
   const removeBook = async () => {
     await dispatch(deleteBook(bookId));
     dispatch(fetchBooks());
@@ -45,7 +46,7 @@ const BookCard = ({ book, bookId }) => {
                     Comments
                   </button>
                   <button
-                    onClick={removeBook(bookId)}
+                    onClick={() => removeBook(bookId)}
                     type="button"
                     className="mb-2"
                     style={{
