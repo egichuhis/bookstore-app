@@ -54,6 +54,7 @@
 - **Show Books List**
 - **Delete Books from API**
 - **Show updated books list**
+- **Styled with Bootstrap**
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
