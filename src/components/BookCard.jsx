@@ -2,13 +2,17 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Chart from './charts/DonutChart';
-import { removeBook } from '../redux/features/books/booksSlice';
+import { fetchBooks, deleteBook } from '../redux/features/books/booksSlice';
 
-const BookCard = ({ book }) => {
-  const {
-    category, title, author, itemId,
-  } = book;
+const BookCard = ({ book, bookId }) => {
   const dispatch = useDispatch();
+  const { title, author, category } = book;
+  const appID = localStorage.getItem('appID');
+
+  const removeBook = async () => {
+    await dispatch(deleteBook(bookId));
+    dispatch(fetchBooks(appID));
+  };
 
   return (
     <div className="card mt-4">
@@ -43,8 +47,8 @@ const BookCard = ({ book }) => {
                     Comments
                   </button>
                   <button
+                    onClick={() => removeBook(bookId)}
                     type="button"
-                    onClick={() => dispatch(removeBook(itemId))}
                     className="mb-2"
                     style={{
                       width: 'fit-content',
@@ -125,8 +129,9 @@ BookCard.propTypes = {
     category: PropTypes.string,
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
-    itemId: PropTypes.string.isRequired,
+    item_id: PropTypes.string.isRequired,
   }).isRequired,
+  bookId: PropTypes.string.isRequired,
 };
 
 export default BookCard;

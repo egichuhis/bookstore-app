@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import generateUniqueId from 'generate-unique-id';
-import { addBook } from '../redux/features/books/booksSlice';
+import { postBooks, fetchBooks } from '../redux/features/books/booksSlice';
 
 const AddBook = () => {
   const dispatch = useDispatch();
+
+  const bookCategories = useSelector((state) => state.categories.bookCategories);
+  const appID = localStorage.getItem('appID');
   const [bookDetails, setBookDetails] = useState({
     title: '',
     author: '',
+    category: '',
   });
 
-  const addNewBook = () => {
+  const addNewBook = async () => {
     const newBookDetails = {
       ...bookDetails,
-      itemId: generateUniqueId(),
+      item_id: generateUniqueId(),
     };
 
-    dispatch(addBook(newBookDetails));
-    setBookDetails({ title: '', author: '' });
+    await dispatch(postBooks(newBookDetails));
+    setBookDetails({ title: '', author: '', category: '' });
+    dispatch(fetchBooks(appID));
   };
 
   return (
@@ -27,7 +32,7 @@ const AddBook = () => {
         <div className="row">
           <div
             className="col-6 col-md-4 align-self-center"
-            style={{ width: '50%' }}
+            style={{ width: '40%' }}
           >
             <input
               type="text"
@@ -39,7 +44,7 @@ const AddBook = () => {
           </div>
           <div
             className="col-6 col-md-4 align-self-center"
-            style={{ width: '25%' }}
+            style={{ width: '20%' }}
           >
             <input
               type="text"
@@ -50,8 +55,27 @@ const AddBook = () => {
             />
           </div>
           <div
+            className="col-6 col-md-4 align-self-center"
+            style={{ width: '20%' }}
+          >
+            <select
+              id="categorySelect"
+              name="category"
+              className="w-100 p-1 text-muted"
+              onChange={(e) => setBookDetails({ ...bookDetails, category: e.target.value })}
+            >
+              <option value="" disabled selected>Category</option>
+              {bookCategories.map((category) => (
+                <option key={category.toLowerCase()} value={category.toLowerCase()}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div
             className="col-md-4 text-end align-self-center"
-            style={{ width: '25%' }}
+            style={{ width: '20%' }}
           >
             <button
               onClick={addNewBook}
