@@ -1,7 +1,5 @@
 <a name="readme-top"></a>
 <div align="center">
-   <img src="./src/imgs/logo.png" alt="logo" width="100"  height="auto" />
-  <br/>
    <img src="./src/imgs/1.png" alt="logo" width="600"  height="auto" />
    <br/>
 </div>
@@ -52,8 +50,11 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **Home page, List Books**
-- **Add Books Section**
+- **Fetch Books from API**
+- **Show Books List**
+- **Delete Books from API**
+- **Show updated books list**
+- **Styled with Bootstrap**
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
