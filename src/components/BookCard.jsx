@@ -7,10 +7,11 @@ import { fetchBooks, deleteBook } from '../redux/features/books/booksSlice';
 const BookCard = ({ book, bookId }) => {
   const dispatch = useDispatch();
   const { title, author, category } = book;
+  const appID = localStorage.getItem('appID');
 
   const removeBook = async () => {
     await dispatch(deleteBook(bookId));
-    dispatch(fetchBooks());
+    dispatch(fetchBooks(appID));
   };
 
   return (

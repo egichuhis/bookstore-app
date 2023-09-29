@@ -5,21 +5,21 @@ import BookCard from './BookCard';
 
 const BooksList = () => {
   const myBooksResponse = useSelector((state) => state.books.booksLibrary);
-  const appID = useSelector((state) => state.books.appID);
   const dispatch = useDispatch();
+  const appID = localStorage.getItem('appID') || '';
 
   useEffect(() => {
     const createAppAndFetchBooks = async () => {
       await dispatch(createNewApp());
-      dispatch(fetchBooks());
+      dispatch(fetchBooks(appID));
     };
 
     if (appID.length > 0) {
-      dispatch(fetchBooks());
+      dispatch(fetchBooks(appID));
     } else {
       createAppAndFetchBooks();
     }
-  }, [dispatch, appID.length]);
+  }, [dispatch, appID]);
 
   const Books = myBooksResponse[0] || {};
 

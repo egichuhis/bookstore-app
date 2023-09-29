@@ -7,7 +7,7 @@ const AddBook = () => {
   const dispatch = useDispatch();
 
   const bookCategories = useSelector((state) => state.categories.bookCategories);
-
+  const appID = localStorage.getItem('appID');
   const [bookDetails, setBookDetails] = useState({
     title: '',
     author: '',
@@ -22,7 +22,7 @@ const AddBook = () => {
 
     await dispatch(postBooks(newBookDetails));
     setBookDetails({ title: '', author: '', category: '' });
-    dispatch(fetchBooks());
+    dispatch(fetchBooks(appID));
   };
 
   return (
