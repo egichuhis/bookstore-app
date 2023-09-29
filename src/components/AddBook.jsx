@@ -3,6 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import generateUniqueId from 'generate-unique-id';
 import { postBooks, fetchBooks } from '../redux/features/books/booksSlice';
 
+const widthBookTitle = { width: '40%' };
+const widthBookTitleInput = { width: '100%' };
+const widthBookAuthor = { width: '20%' };
+const addBtnStyle = {
+  fontSize: 14,
+  background: '#0290ff',
+  paddingRight: 34,
+  paddingLeft: 34,
+};
+
 const AddBook = () => {
   const dispatch = useDispatch();
 
@@ -26,37 +36,37 @@ const AddBook = () => {
   };
 
   return (
-    <div className="card mt-4" style={{ border: 'none' }}>
+    <div className="card mt-4 border-0 mb-3">
       <div className="container">
-        <h4 style={{ color: 'grey', fontSize: '16.4px' }}>ADD NEW BOOK</h4>
+        <h4 className="text-muted fs-5">ADD NEW BOOK</h4>
         <div className="row">
           <div
-            className="col-6 col-md-4 align-self-center"
-            style={{ width: '40%' }}
+            className="col-6 col-md-4 align-self-center w-40"
+            style={widthBookTitle}
           >
             <input
               type="text"
               value={bookDetails.title}
               onChange={(e) => setBookDetails({ ...bookDetails, title: e.target.value })}
               placeholder="Book Title"
-              style={{ width: '100%' }}
+              style={widthBookTitleInput}
             />
           </div>
           <div
             className="col-6 col-md-4 align-self-center"
-            style={{ width: '20%' }}
+            style={widthBookAuthor}
           >
             <input
               type="text"
               value={bookDetails.author}
               onChange={(e) => setBookDetails({ ...bookDetails, author: e.target.value })}
               placeholder="Author"
-              style={{ width: '100%' }}
+              style={widthBookTitleInput}
             />
           </div>
           <div
             className="col-6 col-md-4 align-self-center"
-            style={{ width: '20%' }}
+            style={widthBookAuthor}
           >
             <select
               id="categorySelect"
@@ -75,18 +85,13 @@ const AddBook = () => {
 
           <div
             className="col-md-4 text-end align-self-center"
-            style={{ width: '20%' }}
+            style={widthBookAuthor}
           >
             <button
               onClick={addNewBook}
-              className="btn btn-primary btn-sm"
+              className="btn btn-primary btn-sm text-light"
               type="button"
-              style={{
-                fontSize: 14,
-                background: '#0290ff',
-                paddingRight: 34,
-                paddingLeft: 34,
-              }}
+              style={addBtnStyle}
             >
               ADD BOOK
             </button>
